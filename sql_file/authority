@@ -1,0 +1,53 @@
+DROP TABLE IF EXISTS mng_authority_base_info;
+CREATE TABLE mng_authority_base_info (
+  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  auth_desc    VARCHAR(15)  NOT NULL
+  COMMENT '权限描述',
+  auth_url     VARCHAR(100) NOT NULL
+  COMMENT '权限全URL',
+  parent_id    BIGINT(20)   NOT NULL  DEFAULT 0
+  COMMENT '父目录Id  0：全部',
+  status       TINYINT                DEFAULT 1
+  COMMENT '权限状态 1:正常 2：禁用',
+  operate_id   BIGINT(20)   NOT NULL  DEFAULT 0
+  COMMENT '操作人Id',
+  gmt_created  DATETIME COMMENT '新增记录时间',
+  gmt_modified DATETIME COMMENT '更新记录时间',
+  INDEX i_ot_parent(parent_id)
+)
+  COMMENT '权限基本信息表'
+  DEFAULT CHARACTER SET 'UTF8'
+  ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS mng_authority_parent_info;
+CREATE TABLE mng_authority_parent_info (
+  id                    BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  authority_parent_desc VARCHAR(15) NOT NULL
+  COMMENT '权限目录描述',
+  operate_id            BIGINT(20)  NOT NULL   DEFAULT 0
+  COMMENT '操作人Id',
+  gmt_created           DATETIME COMMENT '新增记录时间',
+  gmt_modified          DATETIME COMMENT '更新记录时间'
+)
+  COMMENT '权限目录信息表'
+  DEFAULT CHARACTER SET 'UTF8'
+  ENGINE = InnoDB;
+
+
+DROP TABLE IF EXISTS mng_aut_role_info;
+CREATE TABLE mng_aut_role_info (
+  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  role_id      BIGINT(20) COMMENT '角色Id',
+  aut_id       BIGINT(20) COMMENT '权限Id',
+  status       TINYINT                DEFAULT 1
+  COMMENT '状态 1:正常 2：禁用',
+  operate_id   BIGINT(20) NOT NULL    DEFAULT 0
+  COMMENT '操作人Id',
+  gmt_created  DATETIME COMMENT '新增记录时间',
+  gmt_modified DATETIME COMMENT '更新记录时间',
+  UNIQUE KEY mng_aut_role_id(role_id, aut_id),
+  INDEX i_ot_role(role_id)
+)
+  COMMENT '权限角色关联表'
+  DEFAULT CHARACTER SET 'UTF8'
+  ENGINE = InnoDB;

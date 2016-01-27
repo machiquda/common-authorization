@@ -1,0 +1,23 @@
+
+drop table if EXISTS mng_user_base_info;
+CREATE TABLE mng_user_base_info (
+  id            BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  user_name      VARCHAR(10) NOT NULL  COMMENT '用户名',
+  gmt_created  DATETIME COMMENT '新增记录时间',
+  gmt_modified DATETIME COMMENT '更新记录时间'
+)  COMMENT '用户基本信息表'  DEFAULT CHARACTER SET 'UTF8' ENGINE = InnoDB;
+
+
+drop table if EXISTS mng_user_role_info;
+CREATE TABLE mng_user_role_info (
+  id            BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  user_id      BIGINT(20) NOT NULL  COMMENT '用户id',
+  role_id    BIGINT(20) NOT NULL  COMMENT '角色 id',
+  status   TINYINT   DEFAULT  1 COMMENT'用户状态 1:正常 2:禁用',
+  gmt_created  DATETIME COMMENT '新增记录时间',
+  gmt_modified DATETIME COMMENT '更新记录时间',
+  operate_id              BIGINT(20) NOT NULL DEFAULT 0 COMMENT  '操作人Id',
+  UNIQUE  KEY mng_user_role_id(user_id)
+)  COMMENT '用户角色关联表'  DEFAULT CHARACTER SET 'UTF8' ENGINE = InnoDB;
+
+

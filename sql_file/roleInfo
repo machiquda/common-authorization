@@ -1,0 +1,13 @@
+drop table if EXISTS mng_role_info;
+CREATE TABLE mng_role_info (
+  id                      BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  role_desc               VARCHAR(15)  DEFAULT '' COMMENT '角色描述',
+  role_name               VARCHAR(15) NOT NULL COMMENT '角色名',
+  status                  TINYINT  DEFAULT  1 COMMENT '角色状态 1:正常 2：禁用',
+  operate_id              BIGINT(20) NOT NULL DEFAULT 0 COMMENT  '操作人Id',
+  gmt_created             DATETIME COMMENT '新增记录时间',
+  gmt_modified            DATETIME COMMENT '更新记录时间'
+)  COMMENT '角色基本信息表'  DEFAULT CHARACTER SET 'UTF8' ENGINE = InnoDB;
+
+
+

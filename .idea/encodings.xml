@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/sql_file" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngAutRoleInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngAuthorityBaseInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngAuthorityParentInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngRoleInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngUserBaseInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/MngUserRoleInfoDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngAutRoleInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngAuthorityBaseInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngAuthorityParentInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngRoleInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngUserBaseInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/dao/impl/MngUserRoleInfoDAOImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngAutRoleInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngAuthorityBaseInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngAuthorityParentInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngRoleCacheInfoDo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngRoleInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngUserBaseInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/MngUserRoleInfoDO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/quhuwai/common/author/domain/Query.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_aut_role_info.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_authority_base_info.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_authority_parent_info.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_role_info.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_user_base_info.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/mng_user_role_info.xml" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

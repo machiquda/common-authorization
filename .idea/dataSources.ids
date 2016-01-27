@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - my_test@120.55.127.184" uuid="f4d5cb52-00a3-47f1-91c3-2c871faa5394">
+    <database-info product="MySQL" version="5.6.23-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="my_test"/>
+    <table name="mng_aut_role_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="role_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5" remarks="6KeS6ImySWQ="/>
+      <column name="aut_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5" remarks="5p2D6ZmQSWQ="/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ==" remarks="54q25oCBIDE65q2j5bi4IDLvvJrnpoHnlKg="/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="mng_aut_role_id" unique="true" columns="role_id,aut_id"/>
+      <index name="i_ot_role" unique="false" columns="role_id"/>
+    </table>
+    <table name="mng_authority_base_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="auth_desc" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" remarks="5p2D6ZmQ5o+P6L+w"/>
+      <column name="auth_url" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" remarks="5p2D6ZmQ5YWoVVJM"/>
+      <column name="parent_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="54i255uu5b2VSWQgIDDvvJrlhajpg6g="/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ==" remarks="5p2D6ZmQ54q25oCBIDE65q2j5bi4IDLvvJrnpoHnlKg="/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="i_ot_parent" unique="false" columns="parent_id"/>
+    </table>
+    <table name="mng_authority_parent_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="authority_parent_desc" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" remarks="5p2D6ZmQ55uu5b2V5o+P6L+w"/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="mng_category_base_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cat_name" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" remarks="57G755uu5ZCN56ew"/>
+      <column name="parent_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="54i255uu5b2VSWQgIDDvvJrlhajpg6g="/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ==" remarks="55uu5b2V54q25oCBIDE65q2j5bi4IDLvvJrnpoHnlKg="/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="i_ot_parent" unique="false" columns="parent_id"/>
+    </table>
+    <table name="mng_role_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="role_desc" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12" def="Jyc=" remarks="6KeS6Imy5o+P6L+w"/>
+      <column name="role_name" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" remarks="6KeS6Imy5ZCN"/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ==" remarks="6KeS6Imy54q25oCBIDE65q2j5bi4IDLvvJrnpoHnlKg="/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="mng_user_base_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_name" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" remarks="55So5oi35ZCN"/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="mng_user_role_info" schema="" catalog="my_test" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="55So5oi3aWQ="/>
+      <column name="role_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="6KeS6ImyIGlk"/>
+      <column name="status" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ==" remarks="55So5oi354q25oCBIDE65q2j5bi4IDI656aB55So"/>
+      <column name="gmt_created" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5paw5aKe6K6w5b2V5pe26Ze0"/>
+      <column name="gmt_modified" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="5pu05paw6K6w5b2V5pe26Ze0"/>
+      <column name="operate_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA==" remarks="5pON5L2c5Lq6SWQ="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="mng_user_role_id" unique="true" columns="user_id"/>
+    </table>
+  </data-source>
+</component>

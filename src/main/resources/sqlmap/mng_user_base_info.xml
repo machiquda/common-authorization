@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quhuwai.common.author.domain.MngUserBaseInfoMapper">
+    	<resultMap id="BeanMap" type="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="SENTENCE_MNG_USER_BASE_INFO">
+		id,user_name,gmt_created,gmt_modified	</sql>
+
+	<sql id="SENTENCE_MNG_USER_BASE_INFO_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id != null">
+				AND id=#{id,jdbcType=BIGINT}
+            </if>
+            <if test="userName != null">
+				AND user_name=#{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="gmtCreated != null">
+				AND gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+            </if>
+            <if test="gmtModified != null">
+				AND gmt_modified=#{gmtModified,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+	</sql>
+
+    <sql id="SENTENCE_MNG_USER_BASE_INFO_PAGED_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="module.id != null">
+                    AND id=#{module.id,jdbcType=BIGINT}
+                </if>
+                            <if test="module.userName != null">
+                    AND user_name=#{module.userName,jdbcType=VARCHAR}
+                </if>
+                            <if test="module.gmtCreated != null">
+                    AND gmt_created=#{module.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="module.gmtModified != null">
+                    AND gmt_modified=#{module.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                    </trim>
+    </sql>
+
+	<!-- mng_user_base_info-琛╯ql璇彞寮�濮�++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<!-- 鏌ヨ澶氭潯涓嶅垎椤佃褰曠殑sql璇彞  -->
+	<select id="queryMngUserBaseInfo" resultMap="BeanMap"
+		parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+		SELECT
+		<include refid="SENTENCE_MNG_USER_BASE_INFO" />
+		FROM
+		mng_user_base_info
+		<include refid="SENTENCE_MNG_USER_BASE_INFO_QUERY" />
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 鏌ヨ澶氭潯涓嶅垎椤佃褰曠殑sql璇彞  -->
+    <select id="querySingleMngUserBaseInfo" resultMap="BeanMap"
+            parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+        SELECT
+        <include refid="SENTENCE_MNG_USER_BASE_INFO" />
+        FROM
+        mng_user_base_info
+        <include refid="SENTENCE_MNG_USER_BASE_INFO_QUERY" />
+        limit 1
+    </select>
+	<!-- 閫氱敤鐨剆qlmap鏌ヨ璇彞锛屽彲杩斿洖澶氭潯璁板綍锛屽彲鎺ュ彈order by鍙妉imit璇彞  -->
+	<select id="queryMngUserBaseInfoByPage" resultMap="BeanMap" parameterType="java.util.Map">
+
+        SELECT
+            <include refid="SENTENCE_MNG_USER_BASE_INFO" />
+        FROM
+            mng_user_base_info
+        <include refid="SENTENCE_MNG_USER_BASE_INFO_PAGED_QUERY"/>
+        <if test="_order != null">
+           order by ${_order}
+        </if>
+        <if test="_limit_start != null and _limit_size !=null">
+            limit #{_limit_start},#{_limit_size}
+        </if>
+    </select>
+    
+    <!-- 閰嶅悎鍒嗛〉浣跨敤鐨刢ount璇彞,鍏辩敤鍚屼竴濂楁煡璇㈡潯浠�  -->
+    <select id="countMngUserBaseInfo" resultType="int" parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+		SELECT  
+           count(1)
+      	FROM
+			 mng_user_base_info 
+    	<include refid="SENTENCE_MNG_USER_BASE_INFO_QUERY"/>
+	</select>
+	
+	<!-- 鏍规嵁涓婚敭鏇存柊鍗曟潯璁板綍  -->
+	<update id="updateMngUserBaseInfoByPk" parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+		 UPDATE mng_user_base_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="id !=null">
+                    ,id=#{id,jdbcType=BIGINT}
+                </if>
+                                        <if test="userName !=null">
+                    ,user_name=#{userName,jdbcType=VARCHAR}
+                </if>
+                                        <if test="gmtCreated !=null">
+                    ,gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                                        ,gmt_modified=now()
+                     </trim>
+		WHERE  id=#{id,jdbcType=BIGINT} 		
+	</update>
+	<!-- 鏍规嵁鏉′欢鏇存柊璁板綍  -->
+	<update id="updateMngUserBaseInfoByCondition" parameterType="java.util.Map">
+		 UPDATE mng_user_base_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="instance.id !=null">
+                    ,id=#{instance.id,jdbcType=BIGINT}
+                </if>
+                                        <if test="instance.userName !=null">
+                    ,user_name=#{instance.userName,jdbcType=VARCHAR}
+                </if>
+                                                    ,gmt_modified=now()
+                     </trim>
+         <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="condition.id != null">
+                    AND id=#{condition.id,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.userName != null">
+                    AND user_name=#{condition.userName,jdbcType=VARCHAR}
+                </if>
+                            <if test="condition.gmtCreated != null">
+                    AND gmt_created=#{condition.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="condition.gmtModified != null">
+                    AND gmt_modified=#{condition.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                     </trim>
+
+
+	</update>
+	
+	<!-- 鏍规嵁DO鎻掑叆鍗曟潯璁板綍  -->
+	<insert id="insertMngUserBaseInfo" parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+
+
+
+		INSERT INTO mng_user_base_info (gmt_created,gmt_modified
+    <if test="id != null">
+        ,id
+    </if>
+    <if test="userName != null">
+        ,user_name
+    </if>
+	      )
+	   VALUES
+	      ( now(),now()
+    <if test="id != null">
+			,#{id,jdbcType=BIGINT}
+	</if>
+    <if test="userName != null">
+			,#{userName,jdbcType=VARCHAR}
+	</if>
+	      )
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+	</insert>
+
+    <!-- 鏍规嵁鏉′欢鍒犻櫎鏁版嵁琛ㄤ俊鎭� -->
+	<delete id="deleteByCondition" parameterType="com.quhuwai.common.author.domain.MngUserBaseInfoDO">
+        DELETE FROM mng_user_base_info
+        <include refid="SENTENCE_MNG_USER_BASE_INFO_QUERY"/>
+    </delete>
+
+
+
+
+	<!-- mng_user_base_info-琛╯ql璇彞缁撴潫========================================================= -->
+</mapper>

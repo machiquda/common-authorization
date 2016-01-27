@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.quhuwai.common.*"/>
+    <bean id="jdbcConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${database.driverClassName}"/>
+        <property name="jdbcUrl" value="${database.url}"/>
+        <property name="user" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="minPoolSize" value="${database.minPoolSize}"/>
+        <property name="initialPoolSize" value="${database.initialPoolSize}"/>
+        <property name="maxPoolSize" value="${database.maxPoolSize}"/>
+        <property name="maxIdleTime" value="${database.maxIdleTime}"/>
+        <property name="acquireIncrement" value="${database.acquireIncrement}"/>
+        <property name="checkoutTimeout" value="${database.checkoutTimeout}"/>
+        <property name="acquireRetryDelay" value="${database.acquireRetryDelay}"/>
+        <property name="acquireRetryAttempts" value="${database.acquireRetryAttempts}"/>
+        <property name="connectionTesterClassName" value="${database.connectionTesterClassName}"/>
+        <property name="preferredTestQuery" value="${database.preferredTestQuery}"/>
+        <property name="maxStatements" value="0"></property>
+    </bean>
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:sqlmap/*.xml"></property>
+    </bean>
+    <bean id="authorityTransactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager">
+            <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource">
+                    <ref bean="dataSource"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="categoryTransactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager">
+            <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource">
+                    <ref bean="dataSource"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="authorizationTransactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager">
+            <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource">
+                    <ref bean="dataSource"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quhuwai.common.author.domain.MngAuthorityBaseInfoMapper">
+    	<resultMap id="BeanMap" type="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="auth_desc" property="authDesc" jdbcType="VARCHAR" />
+		<result column="auth_url" property="authUrl" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="operate_id" property="operateId" jdbcType="BIGINT" />
+		<result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="SENTENCE_MNG_AUTHORITY_BASE_INFO">
+		id,auth_desc,auth_url,parent_id,status,operate_id,gmt_created,gmt_modified	</sql>
+
+	<sql id="SENTENCE_MNG_AUTHORITY_BASE_INFO_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id != null">
+				AND id=#{id,jdbcType=BIGINT}
+            </if>
+            <if test="authDesc != null">
+				AND auth_desc=#{authDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="authUrl != null">
+				AND auth_url=#{authUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+				AND parent_id=#{parentId,jdbcType=BIGINT}
+            </if>
+            <if test="status != null">
+				AND status=#{status,jdbcType=TINYINT}
+            </if>
+            <if test="operateId != null">
+				AND operate_id=#{operateId,jdbcType=BIGINT}
+            </if>
+            <if test="gmtCreated != null">
+				AND gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+            </if>
+            <if test="gmtModified != null">
+				AND gmt_modified=#{gmtModified,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+	</sql>
+
+    <sql id="SENTENCE_MNG_AUTHORITY_BASE_INFO_PAGED_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="module.id != null">
+                    AND id=#{module.id,jdbcType=BIGINT}
+                </if>
+                            <if test="module.authDesc != null">
+                    AND auth_desc=#{module.authDesc,jdbcType=VARCHAR}
+                </if>
+                            <if test="module.authUrl != null">
+                    AND auth_url=#{module.authUrl,jdbcType=VARCHAR}
+                </if>
+                            <if test="module.parentId != null">
+                    AND parent_id=#{module.parentId,jdbcType=BIGINT}
+                </if>
+                            <if test="module.status != null">
+                    AND status=#{module.status,jdbcType=TINYINT}
+                </if>
+                            <if test="module.operateId != null">
+                    AND operate_id=#{module.operateId,jdbcType=BIGINT}
+                </if>
+                            <if test="module.gmtCreated != null">
+                    AND gmt_created=#{module.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="module.gmtModified != null">
+                    AND gmt_modified=#{module.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                    </trim>
+    </sql>
+
+	<!-- mng_authority_base_info-琛╯ql璇彞寮�濮�++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<!-- 鏌ヨ澶氭潯涓嶅垎椤佃褰曠殑sql璇彞  -->
+	<select id="queryMngAuthorityBaseInfo" resultMap="BeanMap"
+		parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+		SELECT
+		<include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO" />
+		FROM
+		mng_authority_base_info
+		<include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO_QUERY" />
+	</select>
+    <!-- 鏌ヨ澶氭潯涓嶅垎椤佃褰曠殑sql璇彞  -->
+    <select id="querySingleMngAuthorityBaseInfo" resultMap="BeanMap"
+            parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+        SELECT
+        <include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO" />
+        FROM
+        mng_authority_base_info
+        <include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO_QUERY" />
+        limit 1
+    </select>
+
+
+    <select id="unQueryMngAuthorityBaseInfo" resultMap="BeanMap"
+            parameterType="java.util.Map">
+        SELECT
+        ab.id,auth_desc,ab.auth_url,ab.parent_id,ab.status,ab.operate_id,ab.gmt_created,ab.gmt_modified
+        FROM
+        mng_authority_base_info ab,mng_aut_role_info ar
+       WHERE ab.id = ar.aut_id AND ar.role_id = #{roleId}
+    </select>
+
+    <select id="unQueryActiveMngAuthorityBaseInfo" resultMap="BeanMap"
+            parameterType="java.util.Map">
+        SELECT
+        ab.id,auth_desc,ab.auth_url,ab.parent_id,ab.status,ab.operate_id,ab.gmt_created,ab.gmt_modified
+        FROM
+        mng_authority_base_info ab,mng_aut_role_info ar
+        WHERE ab.id = ar.aut_id AND ar.role_id = #{roleId} AND ab.status = 1 AND ar.status = 1
+    </select>
+	<!-- 閫氱敤鐨剆qlmap鏌ヨ璇彞锛屽彲杩斿洖澶氭潯璁板綍锛屽彲鎺ュ彈order by鍙妉imit璇彞  -->
+	<select id="queryMngAuthorityBaseInfoByPage" resultMap="BeanMap" parameterType="java.util.Map">
+
+        SELECT
+            <include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO" />
+        FROM
+            mng_authority_base_info
+        <include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO_PAGED_QUERY"/>
+        <if test="_order != null">
+           order by ${_order}
+        </if>
+        <if test="_limit_start != null and _limit_size !=null">
+            limit #{_limit_start},#{_limit_size}
+        </if>
+    </select>
+    
+    <!-- 閰嶅悎鍒嗛〉浣跨敤鐨刢ount璇彞,鍏辩敤鍚屼竴濂楁煡璇㈡潯浠�  -->
+    <select id="countMngAuthorityBaseInfo" resultType="int" parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+		SELECT  
+           count(1)
+      	FROM
+			 mng_authority_base_info 
+    	<include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO_QUERY"/>
+	</select>
+	
+	<!-- 鏍规嵁涓婚敭鏇存柊鍗曟潯璁板綍  -->
+	<update id="updateMngAuthorityBaseInfoByPk" parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+		 UPDATE mng_authority_base_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="id !=null">
+                    ,id=#{id,jdbcType=BIGINT}
+                </if>
+                                        <if test="authDesc !=null">
+                    ,auth_desc=#{authDesc,jdbcType=VARCHAR}
+                </if>
+                                        <if test="authUrl !=null">
+                    ,auth_url=#{authUrl,jdbcType=VARCHAR}
+                </if>
+                                        <if test="parentId !=null">
+                    ,parent_id=#{parentId,jdbcType=BIGINT}
+                </if>
+                                        <if test="status !=null">
+                    ,status=#{status,jdbcType=TINYINT}
+                </if>
+                                        <if test="operateId !=null">
+                    ,operate_id=#{operateId,jdbcType=BIGINT}
+                </if>
+                                        <if test="gmtCreated !=null">
+                    ,gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                                        ,gmt_modified=now()
+                     </trim>
+		WHERE  id=#{id,jdbcType=BIGINT} 		
+	</update>
+	<!-- 鏍规嵁鏉′欢鏇存柊璁板綍  -->
+	<update id="updateMngAuthorityBaseInfoByCondition" parameterType="java.util.Map">
+		 UPDATE mng_authority_base_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="instance.id !=null">
+                    ,id=#{instance.id,jdbcType=BIGINT}
+                </if>
+                                        <if test="instance.authDesc !=null">
+                    ,auth_desc=#{instance.authDesc,jdbcType=VARCHAR}
+                </if>
+                                        <if test="instance.authUrl !=null">
+                    ,auth_url=#{instance.authUrl,jdbcType=VARCHAR}
+                </if>
+                                        <if test="instance.parentId !=null">
+                    ,parent_id=#{instance.parentId,jdbcType=BIGINT}
+                </if>
+                                        <if test="instance.status !=null">
+                    ,status=#{instance.status,jdbcType=TINYINT}
+                </if>
+                                        <if test="instance.operateId !=null">
+                    ,operate_id=#{instance.operateId,jdbcType=BIGINT}
+                </if>
+                                                    ,gmt_modified=now()
+                     </trim>
+         <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="condition.id != null">
+                    AND id=#{condition.id,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.authDesc != null">
+                    AND auth_desc=#{condition.authDesc,jdbcType=VARCHAR}
+                </if>
+                            <if test="condition.authUrl != null">
+                    AND auth_url=#{condition.authUrl,jdbcType=VARCHAR}
+                </if>
+                            <if test="condition.parentId != null">
+                    AND parent_id=#{condition.parentId,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.status != null">
+                    AND status=#{condition.status,jdbcType=TINYINT}
+                </if>
+                            <if test="condition.operateId != null">
+                    AND operate_id=#{condition.operateId,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.gmtCreated != null">
+                    AND gmt_created=#{condition.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="condition.gmtModified != null">
+                    AND gmt_modified=#{condition.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                     </trim>
+
+
+	</update>
+	
+	<!-- 鏍规嵁DO鎻掑叆鍗曟潯璁板綍  -->
+	<insert id="insertMngAuthorityBaseInfo" parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+
+
+
+		INSERT INTO mng_authority_base_info (gmt_created,gmt_modified
+    <if test="id != null">
+        ,id
+    </if>
+    <if test="authDesc != null">
+        ,auth_desc
+    </if>
+    <if test="authUrl != null">
+        ,auth_url
+    </if>
+    <if test="parentId != null">
+        ,parent_id
+    </if>
+    <if test="status != null">
+        ,status
+    </if>
+    <if test="operateId != null">
+        ,operate_id
+    </if>
+	      )
+	   VALUES
+	      ( now(),now()
+    <if test="id != null">
+			,#{id,jdbcType=BIGINT}
+	</if>
+    <if test="authDesc != null">
+			,#{authDesc,jdbcType=VARCHAR}
+	</if>
+    <if test="authUrl != null">
+			,#{authUrl,jdbcType=VARCHAR}
+	</if>
+    <if test="parentId != null">
+			,#{parentId,jdbcType=BIGINT}
+	</if>
+    <if test="status != null">
+			,#{status,jdbcType=TINYINT}
+	</if>
+    <if test="operateId != null">
+			,#{operateId,jdbcType=BIGINT}
+	</if>
+	      )
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+	</insert>
+
+    <!-- 鏍规嵁鏉′欢鍒犻櫎鏁版嵁琛ㄤ俊鎭� -->
+	<delete id="deleteByCondition" parameterType="com.quhuwai.common.author.domain.MngAuthorityBaseInfoDO">
+        DELETE FROM mng_authority_base_info
+        <include refid="SENTENCE_MNG_AUTHORITY_BASE_INFO_QUERY"/>
+    </delete>
+
+
+
+
+	<!-- mng_authority_base_info-琛╯ql璇彞缁撴潫========================================================= -->
+</mapper>

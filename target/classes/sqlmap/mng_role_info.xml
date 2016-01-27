@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quhuwai.common.author.domain.MngRoleInfoMapper">
+    	<resultMap id="BeanMap" type="com.quhuwai.common.author.domain.MngRoleInfoDO">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="operate_id" property="operateId" jdbcType="BIGINT" />
+		<result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="SENTENCE_MNG_ROLE_INFO">
+		id,role_desc,role_name,status,operate_id,gmt_created,gmt_modified	</sql>
+
+	<sql id="SENTENCE_MNG_ROLE_INFO_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id != null">
+				AND id=#{id,jdbcType=BIGINT}
+            </if>
+            <if test="roleDesc != null">
+				AND role_desc=#{roleDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="roleName != null">
+				AND role_name=#{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+				AND status=#{status,jdbcType=TINYINT}
+            </if>
+            <if test="operateId != null">
+				AND operate_id=#{operateId,jdbcType=BIGINT}
+            </if>
+            <if test="gmtCreated != null">
+				AND gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+            </if>
+            <if test="gmtModified != null">
+				AND gmt_modified=#{gmtModified,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+	</sql>
+
+    <sql id="SENTENCE_MNG_ROLE_INFO_PAGED_QUERY">
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="module.id != null">
+                    AND id=#{module.id,jdbcType=BIGINT}
+                </if>
+                            <if test="module.roleDesc != null">
+                    AND role_desc=#{module.roleDesc,jdbcType=VARCHAR}
+                </if>
+                            <if test="module.roleName != null">
+                    AND role_name=#{module.roleName,jdbcType=VARCHAR}
+                </if>
+                            <if test="module.status != null">
+                    AND status=#{module.status,jdbcType=TINYINT}
+                </if>
+                            <if test="module.operateId != null">
+                    AND operate_id=#{module.operateId,jdbcType=BIGINT}
+                </if>
+                            <if test="module.gmtCreated != null">
+                    AND gmt_created=#{module.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="module.gmtModified != null">
+                    AND gmt_modified=#{module.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                    </trim>
+    </sql>
+
+	<!-- mng_role_info-表sql语句开始++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<!-- 查询多条不分页记录的sql语句  -->
+	<select id="queryMngRoleInfo" resultMap="BeanMap"
+		parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+		SELECT
+		<include refid="SENTENCE_MNG_ROLE_INFO" />
+		FROM
+		mng_role_info
+		<include refid="SENTENCE_MNG_ROLE_INFO_QUERY" />
+	</select>
+    <!-- 查询多条不分页记录的sql语句  -->
+    <select id="querySingleMngRoleInfo" resultMap="BeanMap"
+            parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+        SELECT
+        <include refid="SENTENCE_MNG_ROLE_INFO" />
+        FROM
+        mng_role_info
+        <include refid="SENTENCE_MNG_ROLE_INFO_QUERY" />
+        limit 1
+    </select>
+	<!-- 通用的sqlmap查询语句，可返回多条记录，可接受order by及limit语句  -->
+	<select id="queryMngRoleInfoByPage" resultMap="BeanMap" parameterType="java.util.Map">
+
+        SELECT
+            <include refid="SENTENCE_MNG_ROLE_INFO" />
+        FROM
+            mng_role_info
+        <include refid="SENTENCE_MNG_ROLE_INFO_PAGED_QUERY"/>
+        <if test="_order != null">
+           order by ${_order}
+        </if>
+        <if test="_limit_start != null and _limit_size !=null">
+            limit #{_limit_start},#{_limit_size}
+        </if>
+    </select>
+    
+    <!-- 配合分页使用的count语句,共用同一套查询条件  -->
+    <select id="countMngRoleInfo" resultType="int" parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+		SELECT  
+           count(1)
+      	FROM
+			 mng_role_info 
+    	<include refid="SENTENCE_MNG_ROLE_INFO_QUERY"/>
+	</select>
+	
+	<!-- 根据主键更新单条记录  -->
+	<update id="updateMngRoleInfoByPk" parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+		 UPDATE mng_role_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="id !=null">
+                    ,id=#{id,jdbcType=BIGINT}
+                </if>
+                                        <if test="roleDesc !=null">
+                    ,role_desc=#{roleDesc,jdbcType=VARCHAR}
+                </if>
+                                        <if test="roleName !=null">
+                    ,role_name=#{roleName,jdbcType=VARCHAR}
+                </if>
+                                        <if test="status !=null">
+                    ,status=#{status,jdbcType=TINYINT}
+                </if>
+                                        <if test="operateId !=null">
+                    ,operate_id=#{operateId,jdbcType=BIGINT}
+                </if>
+                                        <if test="gmtCreated !=null">
+                    ,gmt_created=#{gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                                        ,gmt_modified=now()
+                     </trim>
+		WHERE  id=#{id,jdbcType=BIGINT} 		
+	</update>
+	<!-- 根据条件更新记录  -->
+	<update id="updateMngRoleInfoByCondition" parameterType="java.util.Map">
+		 UPDATE mng_role_info
+         <trim prefix="set" prefixOverrides=",">
+                            <if test="instance.id !=null">
+                    ,id=#{instance.id,jdbcType=BIGINT}
+                </if>
+                                        <if test="instance.roleDesc !=null">
+                    ,role_desc=#{instance.roleDesc,jdbcType=VARCHAR}
+                </if>
+                                        <if test="instance.roleName !=null">
+                    ,role_name=#{instance.roleName,jdbcType=VARCHAR}
+                </if>
+                                        <if test="instance.status !=null">
+                    ,status=#{instance.status,jdbcType=TINYINT}
+                </if>
+                                        <if test="instance.operateId !=null">
+                    ,operate_id=#{instance.operateId,jdbcType=BIGINT}
+                </if>
+                                                    ,gmt_modified=now()
+                     </trim>
+         <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                            <if test="condition.id != null">
+                    AND id=#{condition.id,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.roleDesc != null">
+                    AND role_desc=#{condition.roleDesc,jdbcType=VARCHAR}
+                </if>
+                            <if test="condition.roleName != null">
+                    AND role_name=#{condition.roleName,jdbcType=VARCHAR}
+                </if>
+                            <if test="condition.status != null">
+                    AND status=#{condition.status,jdbcType=TINYINT}
+                </if>
+                            <if test="condition.operateId != null">
+                    AND operate_id=#{condition.operateId,jdbcType=BIGINT}
+                </if>
+                            <if test="condition.gmtCreated != null">
+                    AND gmt_created=#{condition.gmtCreated,jdbcType=TIMESTAMP}
+                </if>
+                            <if test="condition.gmtModified != null">
+                    AND gmt_modified=#{condition.gmtModified,jdbcType=TIMESTAMP}
+                </if>
+                     </trim>
+
+
+	</update>
+	
+	<!-- 根据DO插入单条记录  -->
+	<insert id="insertMngRoleInfo" parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+
+
+
+		INSERT INTO mng_role_info (gmt_created,gmt_modified
+    <if test="id != null">
+        ,id
+    </if>
+    <if test="roleDesc != null">
+        ,role_desc
+    </if>
+    <if test="roleName != null">
+        ,role_name
+    </if>
+    <if test="status != null">
+        ,status
+    </if>
+    <if test="operateId != null">
+        ,operate_id
+    </if>
+	      )
+	   VALUES
+	      ( now(),now()
+    <if test="id != null">
+			,#{id,jdbcType=BIGINT}
+	</if>
+    <if test="roleDesc != null">
+			,#{roleDesc,jdbcType=VARCHAR}
+	</if>
+    <if test="roleName != null">
+			,#{roleName,jdbcType=VARCHAR}
+	</if>
+    <if test="status != null">
+			,#{status,jdbcType=TINYINT}
+	</if>
+    <if test="operateId != null">
+			,#{operateId,jdbcType=BIGINT}
+	</if>
+	      )
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+	</insert>
+
+    <!-- 根据条件删除数据表信息 -->
+	<delete id="deleteByCondition" parameterType="com.quhuwai.common.author.domain.MngRoleInfoDO">
+        DELETE FROM mng_role_info
+        <include refid="SENTENCE_MNG_ROLE_INFO_QUERY"/>
+    </delete>
+
+
+
+
+	<!-- mng_role_info-表sql语句结束========================================================= -->
+</mapper>
